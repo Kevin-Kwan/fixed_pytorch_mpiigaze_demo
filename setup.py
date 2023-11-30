@@ -19,8 +19,8 @@ def _get_requirements(path):
 setup(
     name='ptgaze',
     version='0.2.8',
-    author='hysts',
-    url='https://github.com/hysts/pytorch_mpiigaze_demo',
+    author='Kevin-Kwan',
+    url='https://github.com/Kevin-Kwan/pytorch_mpiigaze_demo',
     python_requires='>=3.7',
     install_requires=_get_requirements('requirements.txt'),
     packages=find_packages(exclude=('tests', )),

@@ -4,9 +4,9 @@ model:
   name: resnet_simple
   backbone:
     name: resnet_simple
-    pretrained: resnet18
-    resnet_block: basic
-    resnet_layers: [2, 2, 2]
+    pretrained: resnet50
+    resnet_block: bottleneck
+    resnet_layers: [3, 4, 6]
 face_detector:
   mode: dlib
   dlib_model_path: ~/.ptgaze/dlib/shape_predictor_68_face_landmarks.dat
