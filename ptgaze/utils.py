@@ -73,7 +73,7 @@ def download_mpiifacegaze_model() -> pathlib.Path:
     if not output_path.exists():
         logger.debug('Download the pretrained model')
         torch.hub.download_url_to_file(
-            'https://github.com/hysts/pytorch_mpiigaze_demo/releases/download/v0.1.0/mpiifacegaze_resnet_simple.pth',
+            'https://drive.google.com/u/1/uc?id=1043DlmxovsMERPr4VuniLQ6H6pkgKenL&export=download&confirm=t&uuid=fe0abf1f-9ae3-4da0-92e0-d01b91178a0f&at=AB6BwCDndyKkP3qL17-HkwXmuX8w:1701382451795',
             output_path.as_posix())
     else:
         logger.debug(f'The pretrained model {output_path} already exists.')
