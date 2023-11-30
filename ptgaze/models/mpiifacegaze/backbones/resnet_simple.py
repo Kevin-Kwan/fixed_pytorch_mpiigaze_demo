@@ -1,10 +1,10 @@
 import torch
 import torchvision
-from omegaconf import DictConfig
+import yacs.config
 
 
 class Model(torchvision.models.ResNet):
-    def __init__(self, config: DictConfig):
+    def __init__(self, config: yacs.config.CfgNode):
         block_name = config.model.backbone.resnet_block
         if block_name == 'basic':
             block = torchvision.models.resnet.BasicBlock
@@ -12,22 +12,27 @@ class Model(torchvision.models.ResNet):
             block = torchvision.models.resnet.Bottleneck
         else:
             raise ValueError
-        layers = list(config.model.backbone.resnet_layers) + [1]
+        layers = config.model.backbone.resnet_layers + [1]
         super().__init__(block, layers)
         del self.layer4
         del self.avgpool
         del self.fc
 
         pretrained_name = config.model.backbone.pretrained
+        print(pretrained_name)
         if pretrained_name:
-            state_dict = torch.hub.load_state_dict_from_url(
-                torchvision.models.resnet.model_urls[pretrained_name])
-            self.load_state_dict(state_dict, strict=False)
+            if pretrained_name == 'resnet50':
+              model = torchvision.models.resnet50(pretrained=True)
+            elif pretrained_name == 'resnet18':
+               model = torchvision.models.resnet18(pretrained=True)
             # While the pretrained models of torchvision are trained
             # using images with RGB channel order, in this repository
             # images are treated as BGR channel order.
             # Therefore, reverse the channel order of the first
             # convolutional layer.
+            # Add more conditions for other models if needed
+            state_dict = model.state_dict()
+            self.load_state_dict(state_dict, strict=False)
             module = self.conv1
             module.weight.data = module.weight.data[:, [2, 1, 0]]
 
