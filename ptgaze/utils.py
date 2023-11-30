@@ -69,7 +69,7 @@ def download_mpiifacegaze_model() -> pathlib.Path:
     logger.debug('Called _download_mpiifacegaze_model()')
     output_dir = pathlib.Path('~/.ptgaze/models/').expanduser()
     output_dir.mkdir(exist_ok=True, parents=True)
-    output_path = output_dir / 'mpiifacegaze_resnet_simple.pth'
+    output_path = output_dir / 'mpiifacegaze_resnet_50.pth'
     if not output_path.exists():
         logger.debug('Download the pretrained model')
         torch.hub.download_url_to_file(
