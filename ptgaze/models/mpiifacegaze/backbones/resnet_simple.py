@@ -1,10 +1,10 @@
 import torch
 import torchvision
-import yacs.config
+from omegaconf import DictConfig
 
 
 class Model(torchvision.models.ResNet):
-    def __init__(self, config: yacs.config.CfgNode):
+    def __init__(self, config: DictConfig):
         block_name = config.model.backbone.resnet_block
         if block_name == 'basic':
             block = torchvision.models.resnet.BasicBlock
@@ -12,14 +12,13 @@ class Model(torchvision.models.ResNet):
             block = torchvision.models.resnet.Bottleneck
         else:
             raise ValueError
-        layers = config.model.backbone.resnet_layers + [1]
+        layers = list(config.model.backbone.resnet_layers) + [1]
         super().__init__(block, layers)
         del self.layer4
         del self.avgpool
         del self.fc
 
         pretrained_name = config.model.backbone.pretrained
-        print(pretrained_name)
         if pretrained_name:
             if pretrained_name == 'resnet50':
               model = torchvision.models.resnet50(pretrained=True)
