@@ -108,9 +108,8 @@ def download_mpiifacegaze_model() -> pathlib.Path:
 #         logger.debug(f'The pretrained model {output_path} already exists.')
 #     return output_path
 
-#  Here's the checkpoint for AlexNet (unevaluated/untested)
-# https://drive.google.com/u/2/uc?id=10ORqWLX8xSxnPBwerCFO3o6leaWcdnEZ&export=download&confirm=t&uuid=55940d3b-9c8a-4a27-9ea5-998c3dc54a06&at=AB6BwCAfcdruzj2zqzv0K2DaGEed:1701398671393
-
+#  Here's the checkpoint for AlexNet
+# https://drive.google.com/u/2/uc?id=10NxiCB1zbqUicc7ODFvMXEgrM3DhUkfw&export=download&confirm=t&uuid=552cc5b3-c69f-4e1c-8a1b-5650f1be1fa8&at=AB6BwCCSt1detVg8tsKWcxIXOAPn:1701401894811
 
 def download_ethxgaze_model() -> pathlib.Path:
     logger.debug('Called _download_ethxgaze_model()')
