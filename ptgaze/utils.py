@@ -77,6 +77,7 @@ def download_mpiigaze_model() -> pathlib.Path:
 #     else:
 #         logger.debug(f'The pretrained model {output_path} already exists.')
 #     return output_path
+# untested btw
 
 def download_mpiifacegaze_model() -> pathlib.Path:
     logger.debug('Called _download_mpiifacegaze_model()')
@@ -92,7 +93,7 @@ def download_mpiifacegaze_model() -> pathlib.Path:
         logger.debug(f'The pretrained model {output_path} already exists.')
     return output_path
 
-# Uncomment if you want resnet-18
+# Uncomment and comment out above if you want resnet-18
 # def download_mpiifacegaze_model() -> pathlib.Path:
 #     logger.debug('Called _download_mpiifacegaze_model()')
 #     output_dir = pathlib.Path('~/.ptgaze/models/').expanduser()
@@ -106,6 +107,9 @@ def download_mpiifacegaze_model() -> pathlib.Path:
 #     else:
 #         logger.debug(f'The pretrained model {output_path} already exists.')
 #     return output_path
+
+#  Here's the checkpoint for AlexNet (unevaluated/untested)
+# https://drive.google.com/u/2/uc?id=10ORqWLX8xSxnPBwerCFO3o6leaWcdnEZ&export=download&confirm=t&uuid=55940d3b-9c8a-4a27-9ea5-998c3dc54a06&at=AB6BwCAfcdruzj2zqzv0K2DaGEed:1701398671393
 
 
 def download_ethxgaze_model() -> pathlib.Path:
