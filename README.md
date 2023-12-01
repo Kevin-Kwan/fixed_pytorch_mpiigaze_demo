@@ -1,3 +1,5 @@
+Kevin: To run this after cloning, simply run `python setup.py install`. Then follow the "Run Demo" instructions and pass in the correct parameters.
+
 # A demo program of gaze estimation models (MPIIGaze, MPIIFaceGaze, ETH-XGaze)
 
 [![PyPI version](https://badge.fury.io/py/ptgaze.svg)](https://pypi.org/project/ptgaze/)
@@ -29,10 +31,11 @@ This program is tested only on Ubuntu.
 
 ### Installation
 
+(ignore)
+
 ```bash
 pip install ptgaze
 ```
-
 
 ### Run demo
 
@@ -40,9 +43,7 @@ pip install ptgaze
 ptgaze --mode eth-xgaze
 ```
 
-
 ### Usage
-
 
 ```
 usage: ptgaze [-h] [--config CONFIG] [--mode {mpiigaze,mpiifacegaze,eth-xgaze}]
@@ -84,7 +85,6 @@ to show or hide intermediate results:
 - `h`: head pose
 - `t`: projected points of 3D face model
 - `b`: face bounding box
-
 
 ## References
 

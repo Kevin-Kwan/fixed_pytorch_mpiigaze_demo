@@ -63,7 +63,20 @@ def download_mpiigaze_model() -> pathlib.Path:
     else:
         logger.debug(f'The pretrained model {output_path} already exists.')
     return output_path
-
+# Lenet, remember to edit ptgaze\data\configs\mpiigaze.yaml based on a similar format to its config from other repos
+# def download_mpiigaze_model() -> pathlib.Path:
+#     logger.debug('Called _download_mpiigaze_model()')
+#     output_dir = pathlib.Path('~/.ptgaze/models/').expanduser()
+#     output_dir.mkdir(exist_ok=True, parents=True)
+#     output_path = output_dir / 'mpiigaze_lenet.pth'
+#     if not output_path.exists():
+#         logger.debug('Download the pretrained model')
+#         torch.hub.download_url_to_file(
+#             'https://drive.google.com/u/2/uc?id=1-QMqDJfahhEZ5ZXQsmZ36b4eTPu1v9bo&export=download',
+#             output_path.as_posix())
+#     else:
+#         logger.debug(f'The pretrained model {output_path} already exists.')
+#     return output_path
 
 def download_mpiifacegaze_model() -> pathlib.Path:
     logger.debug('Called _download_mpiifacegaze_model()')
