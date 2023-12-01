@@ -1,3 +1,4 @@
+Tested on Windows 10.
 Kevin: To run this after cloning, simply run `python setup.py install`. Then follow the "Run Demo" instructions and pass in the correct parameters.
 
 # A demo program of gaze estimation models (MPIIGaze, MPIIFaceGaze, ETH-XGaze)
