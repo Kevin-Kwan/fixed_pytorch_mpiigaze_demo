@@ -203,7 +203,7 @@ class Demo:
          
         # Calculate coordinates based on pitch and yaw
         x = ((yaw + 20) / 20) * screen_width
-        y = ((pitch + 20) / 20) * screen_height
+        y = ((pitch + 10) / 10) * screen_height
         
         # Move the mouse to the calculated position
         pyautogui.moveTo(x, y,duration=0.1)
