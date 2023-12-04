@@ -2,8 +2,6 @@ import datetime
 import logging
 import pathlib
 from typing import Optional
-import pyautogui
-
 
 import cv2
 import numpy as np
@@ -185,7 +183,6 @@ class Demo:
 
         euler_angles = face.head_pose_rot.as_euler('XYZ', degrees=True)
         pitch, yaw, roll = face.change_coordinate_system(euler_angles)
-        #self.move_mouse(pitch,yaw)
         logger.info(f'[head] pitch: {pitch:.2f}, yaw: {yaw:.2f}, '
                     f'roll: {roll:.2f}, distance: {face.distance:.2f}')
 
@@ -195,20 +192,6 @@ class Demo:
         self.visualizer.draw_points(face.landmarks,
                                     color=(0, 255, 255),
                                     size=1)
-        
-
-    def move_mouse(self, pitch, yaw):
-        # Assuming screen resolution of 1920x1080
-        screen_width, screen_height = pyautogui.size()
-         
-        # Calculate coordinates based on pitch and yaw
-        x = ((yaw + 20) / 20) * screen_width
-        y = ((pitch + 20) / 20) * screen_height
-        
-        # Move the mouse to the calculated position
-        pyautogui.moveTo(x, y,duration=0.1)
-
-
 
     def _draw_face_template_model(self, face: Face) -> None:
         if not self.show_template_model:
@@ -242,16 +225,12 @@ class Demo:
                 self.visualizer.draw_3d_line(
                     eye.center, eye.center + length * eye.gaze_vector)
                 pitch, yaw = np.rad2deg(eye.vector_to_angle(eye.gaze_vector))
-
                 logger.info(
                     f'[{key.name.lower()}] pitch: {pitch:.2f}, yaw: {yaw:.2f}')
-        elif self.config.mode in ['MPIIFaceGaze', 'ETH-XGaze']:
+        elif self.config.mode in ['MPIIFaceGaze', 'ETH-XGaze']: 
             self.visualizer.draw_3d_line(
                 face.center, face.center + length * face.gaze_vector)
             pitch, yaw = np.rad2deg(face.vector_to_angle(face.gaze_vector))
-            print(face.gaze_vector)
-            self.move_mouse(pitch,yaw)
             logger.info(f'[face] pitch: {pitch:.2f}, yaw: {yaw:.2f}')
-        
         else:
             raise ValueError
