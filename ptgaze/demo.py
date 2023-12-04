@@ -38,6 +38,11 @@ class Demo:
         self.show_normalized_image = self.config.demo.show_normalized_image
         self.show_template_model = self.config.demo.show_template_model
 
+        self.avg_pitch = 0
+        self.avg_yaw = 0
+        self.n = 0
+        self.c = 0.9
+
     def run(self) -> None:
         if self.config.demo.use_camera or self.config.demo.video_path:
             self._run_on_video()
@@ -198,15 +203,44 @@ class Demo:
         
 
     def move_mouse(self, pitch, yaw):
-        # Assuming screen resolution of 1920x1080
         screen_width, screen_height = pyautogui.size()
         
         # Calculate coordinates based on pitch and yaw
-        x = int((yaw + 180) * (screen_width / 360))*1.5
-        y = int((pitch + 90) * (screen_height / 180))*1.5
+        #x = int((yaw)/-20 * screen_width)
+        #y = int((pitch)/-20 * screen_height)
         
         # Move the mouse to the calculated position
-        pyautogui.moveTo(x, y,duration=1)
+        #pyautogui.moveTo(x, y)
+
+        # Scale pitch and yaw based on sensitivity
+        self.sensitivity = 700
+        pitch = pitch * np.pi/180
+        yaw= yaw * np.pi/180
+
+        self.n += 1
+        self.avg_pitch = ((self.n - 1) * self.avg_pitch + pitch) / self.n
+        self.avg_yaw = ((self.n - 1) * self.avg_yaw + yaw) / self.n
+
+        pitch -= self.avg_pitch
+        yaw -= self.avg_yaw
+
+        # Get the current mouse position
+        current_x, current_y = pyautogui.position()
+
+        # Calculate the new mouse position based on pitch and yaw
+        dx = yaw #np.cos(yaw)
+        dy = -pitch #-np.cos(pitch)
+        new_x = current_x + dx * self.sensitivity
+        new_y = current_y + dy * self.sensitivity
+
+        print(f"dx, dy: {dx}, {dy}")
+
+        # Ensure the new mouse coordinates stay within the screen boundaries
+        new_x = max(0, min(new_x, screen_width - 1))
+        new_y = max(0, min(new_y, screen_height - 1))
+
+        # Move the mouse to the new position
+        pyautogui.moveTo(new_x, new_y)
 
 
 
