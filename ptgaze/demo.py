@@ -38,10 +38,15 @@ class Demo:
         self.show_normalized_image = self.config.demo.show_normalized_image
         self.show_template_model = self.config.demo.show_template_model
 
+        self.pitch = 0
+        self.yaw = 0
         self.avg_pitch = 0
         self.avg_yaw = 0
         self.n = 0
         self.c = 0.9
+
+        # for the purposes of calibration
+        self.calib = [None] * 4
 
     def run(self) -> None:
         if self.config.demo.use_camera or self.config.demo.video_path:
@@ -162,6 +167,7 @@ class Demo:
         key = cv2.waitKey(self.config.demo.wait_time) & 0xff
         if key in self.QUIT_KEYS:
             self.stop = True
+            print(self.calib)
         elif key == ord('b'):
             self.show_bbox = not self.show_bbox
         elif key == ord('l'):
@@ -172,6 +178,19 @@ class Demo:
             self.show_normalized_image = not self.show_normalized_image
         elif key == ord('t'):
             self.show_template_model = not self.show_template_model
+
+        elif key == ord('w'):
+            self.calib[0] = (self.pitch, self.yaw)
+
+        elif key == ord('r'):
+            self.calib[1] = (self.pitch, self.yaw)
+
+        elif key == ord('s'):
+            self.calib[2] = (self.pitch, self.yaw)
+
+        elif key == ord('f'):
+            self.calib[3] = (self.pitch, self.yaw)
+
         else:
             return False
         return True
@@ -212,6 +231,9 @@ class Demo:
         # Move the mouse to the calculated position
         #pyautogui.moveTo(x, y)
 
+        self.pitch = pitch
+        self.yaw = yaw
+
         # Scale pitch and yaw based on sensitivity
         self.sensitivity = 700
         pitch = pitch * np.pi/180
@@ -233,7 +255,8 @@ class Demo:
         new_x = current_x + dx * self.sensitivity
         new_y = current_y + dy * self.sensitivity
 
-        print(f"dx, dy: {dx}, {dy}")
+        print(f"> dx, dy: {dx}, {dy}")
+        print(self.calib)
 
         # Ensure the new mouse coordinates stay within the screen boundaries
         new_x = max(0, min(new_x, screen_width - 1))
