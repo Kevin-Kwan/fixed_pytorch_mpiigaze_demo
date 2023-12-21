@@ -2,6 +2,7 @@ Tested on Windows 10.
 To run this after cloning, simply install C++ build tools from https://download.visualstudio.microsoft.com/download/pr/c5c3dd47-22fe-4326-95b1-f4468515ca9a/29f68e9b222e5430740711fd320cdd055bea8e33c3fc1e157eaa1ac2ba0c2b36/vs_BuildTools.exe.
 Next, make sure you have cMake installed before running `python setup.py install`. Then follow the "Run Demo" instructions and pass in the correct parameters.
 
+Check Out this Modified Repo for how to train your own architectures: https://github.com/Kevin-Kwan/modified_training_pytorch_mpiigaze
 Original Repo: https://github.com/hysts/pytorch_mpiigaze_demo
 
 # A demo program of gaze estimation models (MPIIGaze, MPIIFaceGaze, ETH-XGaze)
